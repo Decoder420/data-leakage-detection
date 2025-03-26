@@ -1,6 +1,22 @@
-# data-leakage-detection
-Data leakage poses a significant risk to organizations, leading to financial losses, reputational damage, and legal liabilities. This project introduces an innovative framework for detecting and identifying the source of data leaks in environments where sensitive information is shared with multiple entities. The proposed method leverages strategic data allocation combined with the injection of realistic synthetic data, enabling the system to track unauthorized dissemination effectively.
+# Data-Leakage-Detection
 
-The solution employs advanced web technologies such as HTML5, CSS3, JavaScript, Bootstrap4, and backend tools including PHP and MySQL. This technological stack ensures a seamless user experience, efficient data management, and robust backend operations for secure processing. The integration of dynamic and static techniques within the system allows for real-time monitoring, precise detection, and enhanced identification of potential malicious actors.
+### Problem Statement: 
+A data distributor has given sensitive data to a set of supposedly trusted agents (third parties). Some of the data are leaked and found in an unauthorized place (e.g., on the web or somebody&#39;s laptop). The distributor must assess the likelihood that the leaked data came from one or more agents, as opposed to having been independently gathered by other means. We propose data allocation strategies (across the agents) that improve the probability of identifying leakages. These methods do not rely on alterations of the released data (e.g., watermarks). In some cases, we can also inject “realistic but fake” data records to further improve our chances of detecting leakage and identifying the guilty party.
 
-By mitigating the risk of data breaches, this system empowers organizations to safeguard their digital assets while maintaining the integrity of shared information. The project serves as a vital tool for industries handling sensitive data, offering a proactive, scalable, and cost-effective mechanism to address data leakage challenges. This approach not only strengthens data security measures but also reduces the reliance on traditional methods like watermarks or explicit monitoring, paving the way for more innovative solutions in the field of data protection.
+### Project Requirements:
+* Front End - 
+  * HTML5, CSS3, JavaScript, Bootstrap4
+* Backend -
+  * PHP, MySQL (XAMPP Server)
+* Code Editor -
+  * VS Code/Notepad++/Sublime/Atom
+* OS -
+  * Windows/Mac/Linux
+* Browser -
+  * Chrome/Safari/Firefox
+
+### Steps to Run the Project:
+1. Clone the Repo to your System
+2. Enable XAMPP Server
+3. Create a database named "data_leakage"
+4. Run the project on any browser.
