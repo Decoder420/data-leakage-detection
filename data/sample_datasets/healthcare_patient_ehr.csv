@@ -1,0 +1,81 @@
+patient_id,patient_name,email,primary_diagnosis,treating_physician,insurance_provider,treatment_status
+MED-PAT-0001,Keith Berry,keith.berry@hotmail.com,Hypertension,"Dr. Huang, MD",Kaiser Permanente,Observation
+MED-PAT-0002,Stephanie Ballard,stephanie.ballard@yahoo.com,Type 2 Diabetes,"Dr. Roberts, MD",BlueCross BlueShield,Observation
+MED-PAT-0003,Sandra Douglas,sandra.douglas@hotmail.com,Hypertension,"Dr. Lewis, MD",Aetna,Observation
+MED-PAT-0004,Derrick Gilbert,derrick.gilbert@hotmail.com,Coronary Artery Disease,"Dr. Sanchez, MD",UnitedHealthcare,In Remission
+MED-PAT-0005,Brian Gutierrez,brian.gutierrez@hotmail.com,Hypertension,"Dr. Garcia, MD",UnitedHealthcare,Active Outpatient
+MED-PAT-0006,Tamara Spence,tamara.spence@gmail.com,Hypertension,"Dr. Delgado, MD",Kaiser Permanente,Scheduled Surgery
+MED-PAT-0007,Debra Avila,debra.avila@yahoo.com,Asthma,"Dr. Mitchell, MD",BlueCross BlueShield,Active Outpatient
+MED-PAT-0008,Denise Hall,denise.hall@hotmail.com,Type 2 Diabetes,"Dr. Gentry, MD",UnitedHealthcare,Scheduled Surgery
+MED-PAT-0009,Nicole Thompson,nicole.thompson@gmail.com,Hypertension,"Dr. French, MD",UnitedHealthcare,Observation
+MED-PAT-0010,Nancy Smith,nancy.smith@hotmail.com,Rheumatoid Arthritis,"Dr. Rodriguez, MD",Aetna,Observation
+MED-PAT-0011,Shawn Davidson,shawn.davidson@hotmail.com,Hypertension,"Dr. Small, MD",UnitedHealthcare,Scheduled Surgery
+MED-PAT-0012,Joshua Lamb,joshua.lamb@yahoo.com,Coronary Artery Disease,"Dr. Simon, MD",Aetna,In Remission
+MED-PAT-0013,Alexis Rogers,alexis.rogers@yahoo.com,Rheumatoid Arthritis,"Dr. Craig, MD",UnitedHealthcare,In Remission
+MED-PAT-0014,Cheryl Fowler,cheryl.fowler@yahoo.com,Hypertension,"Dr. Robertson, MD",BlueCross BlueShield,Scheduled Surgery
+MED-PAT-0015,Elizabeth Lopez,elizabeth.lopez@gmail.com,Hypertension,"Dr. Morris, MD",UnitedHealthcare,Active Outpatient
+MED-PAT-0016,Jose Young,jose.young@yahoo.com,Asthma,"Dr. Turner, MD",BlueCross BlueShield,Observation
+MED-PAT-0017,Desiree Schwartz,desiree.schwartz@gmail.com,Type 2 Diabetes,"Dr. Marshall, MD",UnitedHealthcare,Scheduled Surgery
+MED-PAT-0018,Gina Leblanc,gina.leblanc@hotmail.com,Asthma,"Dr. Vaughn, MD",Aetna,Observation
+MED-PAT-0019,Christina Robinson,christina.robinson@gmail.com,Hypertension,"Dr. Hernandez, MD",Aetna,Scheduled Surgery
+MED-PAT-0020,Jacqueline Durham,jacqueline.durham@hotmail.com,Coronary Artery Disease,"Dr. Gill, MD",BlueCross BlueShield,Scheduled Surgery
+MED-PAT-0021,Allison Cox,allison.cox@hotmail.com,Type 2 Diabetes,"Dr. Brown, MD",UnitedHealthcare,In Remission
+MED-PAT-0022,Franklin Bond,franklin.bond@yahoo.com,Type 2 Diabetes,"Dr. Frazier, MD",Kaiser Permanente,Active Outpatient
+MED-PAT-0023,Rachel Griffin,rachel.griffin@gmail.com,Hypertension,"Dr. Anderson, MD",Kaiser Permanente,Scheduled Surgery
+MED-PAT-0024,Anne Hansen,anne.hansen@hotmail.com,Asthma,"Dr. Cummings, MD",Kaiser Permanente,Observation
+MED-PAT-0025,Lisa Reese,lisa.reese@hotmail.com,Type 2 Diabetes,"Dr. Williams, MD",Aetna,Active Outpatient
+MED-PAT-0026,Amber Brown,amber.brown@gmail.com,Hypertension,"Dr. Johnson, MD",Kaiser Permanente,In Remission
+MED-PAT-0027,Kayla Cannon,kayla.cannon@hotmail.com,Hypertension,"Dr. Brooks, MD",Kaiser Permanente,Scheduled Surgery
+MED-PAT-0028,Molly Knox,molly.knox@yahoo.com,Type 2 Diabetes,"Dr. Vega, MD",UnitedHealthcare,Observation
+MED-PAT-0029,David Haney,david.haney@yahoo.com,Rheumatoid Arthritis,"Dr. Anderson, MD",UnitedHealthcare,Active Outpatient
+MED-PAT-0030,Katelyn Good,katelyn.good@yahoo.com,Rheumatoid Arthritis,"Dr. Coleman, MD",Kaiser Permanente,In Remission
+MED-PAT-0031,John Reed,john.reed@yahoo.com,Coronary Artery Disease,"Dr. Pineda, MD",BlueCross BlueShield,Active Outpatient
+MED-PAT-0032,Lisa Barnes,lisa.barnes@gmail.com,Coronary Artery Disease,"Dr. Harris, MD",BlueCross BlueShield,Active Outpatient
+MED-PAT-0033,Sean Powers,sean.powers@gmail.com,Coronary Artery Disease,"Dr. Yang, MD",Kaiser Permanente,Scheduled Surgery
+MED-PAT-0034,Jimmy Robinson,jimmy.robinson@gmail.com,Coronary Artery Disease,"Dr. Gordon, MD",Aetna,In Remission
+MED-PAT-0035,Lisa Dennis,lisa.dennis@yahoo.com,Rheumatoid Arthritis,"Dr. Harper, MD",Aetna,In Remission
+MED-PAT-0036,Kevin Thomas,kevin.thomas@hotmail.com,Rheumatoid Arthritis,"Dr. Walker, MD",Aetna,Observation
+MED-PAT-0037,Bruce Fry,bruce.fry@hotmail.com,Coronary Artery Disease,"Dr. Garrett, MD",Kaiser Permanente,Scheduled Surgery
+MED-PAT-0038,Brandon Cooper,brandon.cooper@hotmail.com,Hypertension,"Dr. Floyd, MD",Aetna,Scheduled Surgery
+MED-PAT-0039,Ricky Evans,ricky.evans@gmail.com,Rheumatoid Arthritis,"Dr. Wells, MD",UnitedHealthcare,Observation
+MED-PAT-0040,Meredith Thomas,meredith.thomas@yahoo.com,Type 2 Diabetes,"Dr. Hart, MD",Kaiser Permanente,In Remission
+MED-PAT-0041,Paul Scott,paul.scott@yahoo.com,Type 2 Diabetes,"Dr. Nielsen, MD",Aetna,Active Outpatient
+MED-PAT-0042,Amanda Calderon,amanda.calderon@gmail.com,Asthma,"Dr. Bennett, MD",BlueCross BlueShield,Active Outpatient
+MED-PAT-0043,Jacob Gill,jacob.gill@hotmail.com,Rheumatoid Arthritis,"Dr. Robinson, MD",UnitedHealthcare,Observation
+MED-PAT-0044,Kevin Stout,kevin.stout@gmail.com,Coronary Artery Disease,"Dr. Hayden, MD",BlueCross BlueShield,Scheduled Surgery
+MED-PAT-0045,Robin Dominguez,robin.dominguez@hotmail.com,Coronary Artery Disease,"Dr. Sanders, MD",UnitedHealthcare,Observation
+MED-PAT-0046,Kimberly James,kimberly.james@hotmail.com,Asthma,"Dr. Parker, MD",Aetna,Scheduled Surgery
+MED-PAT-0047,Steven Lang,steven.lang@hotmail.com,Hypertension,"Dr. Gill, MD",Aetna,In Remission
+MED-PAT-0048,Nathan Gutierrez,nathan.gutierrez@hotmail.com,Coronary Artery Disease,"Dr. Figueroa, MD",BlueCross BlueShield,Observation
+MED-PAT-0049,Angela Silva,angela.silva@hotmail.com,Hypertension,"Dr. Phillips, MD",UnitedHealthcare,Observation
+MED-PAT-0050,Jerry Hudson,jerry.hudson@gmail.com,Hypertension,"Dr. Pierce, MD",Aetna,Observation
+MED-PAT-0051,Kathryn Burns,kathryn.burns@hotmail.com,Hypertension,"Dr. Murray, MD",Aetna,In Remission
+MED-PAT-0052,Donald Payne,donald.payne@gmail.com,Rheumatoid Arthritis,"Dr. Mooney, MD",BlueCross BlueShield,Active Outpatient
+MED-PAT-0053,Mary Jones,mary.jones@hotmail.com,Type 2 Diabetes,"Dr. Duran, MD",Kaiser Permanente,In Remission
+MED-PAT-0054,Megan Hall,megan.hall@hotmail.com,Coronary Artery Disease,"Dr. Smith, MD",Kaiser Permanente,Observation
+MED-PAT-0055,Bruce Little,bruce.little@hotmail.com,Hypertension,"Dr. Hopkins, MD",BlueCross BlueShield,Active Outpatient
+MED-PAT-0056,Amanda Jenkins,amanda.jenkins@gmail.com,Rheumatoid Arthritis,"Dr. Bowen, MD",Aetna,Active Outpatient
+MED-PAT-0057,Wayne Wolfe,wayne.wolfe@yahoo.com,Coronary Artery Disease,"Dr. Rodriguez, MD",BlueCross BlueShield,In Remission
+MED-PAT-0058,John Harvey,john.harvey@yahoo.com,Asthma,"Dr. Adams, MD",Kaiser Permanente,Active Outpatient
+MED-PAT-0059,Nathan Sullivan,nathan.sullivan@hotmail.com,Coronary Artery Disease,"Dr. Branch, MD",UnitedHealthcare,Observation
+MED-PAT-0060,Gabriella Abbott,gabriella.abbott@hotmail.com,Type 2 Diabetes,"Dr. Davis, MD",Kaiser Permanente,Scheduled Surgery
+MED-PAT-0061,Angela Brown,angela.brown@gmail.com,Coronary Artery Disease,"Dr. Miller, MD",Kaiser Permanente,Observation
+MED-PAT-0062,Ariel Hodge,ariel.hodge@gmail.com,Rheumatoid Arthritis,"Dr. Ellison, MD",UnitedHealthcare,In Remission
+MED-PAT-0063,Rachel Schwartz,rachel.schwartz@hotmail.com,Hypertension,"Dr. Nelson, MD",BlueCross BlueShield,Observation
+MED-PAT-0064,Rachel Elliott,rachel.elliott@gmail.com,Coronary Artery Disease,"Dr. Mcfarland, MD",Aetna,Active Outpatient
+MED-PAT-0065,Suzanne Matthews,suzanne.matthews@hotmail.com,Hypertension,"Dr. Hickman, MD",Aetna,In Remission
+MED-PAT-0066,Anne Knight,anne.knight@yahoo.com,Rheumatoid Arthritis,"Dr. Rivera, MD",UnitedHealthcare,Active Outpatient
+MED-PAT-0067,Vincent Mccann,vincent.mccann@gmail.com,Type 2 Diabetes,"Dr. Kim, MD",BlueCross BlueShield,Observation
+MED-PAT-0068,Cassie Austin,cassie.austin@hotmail.com,Hypertension,"Dr. Novak, MD",Aetna,Active Outpatient
+MED-PAT-0069,Cynthia Bowers,cynthia.bowers@yahoo.com,Hypertension,"Dr. Perez, MD",Kaiser Permanente,Scheduled Surgery
+MED-PAT-0070,Jacob Willis,jacob.willis@yahoo.com,Type 2 Diabetes,"Dr. Barton, MD",Aetna,In Remission
+MED-PAT-0071,Jennifer Miller,jennifer.miller@gmail.com,Hypertension,"Dr. Dawson, MD",UnitedHealthcare,Scheduled Surgery
+MED-PAT-0072,Levi Rodriguez,levi.rodriguez@gmail.com,Asthma,"Dr. Wallace, MD",Aetna,Active Outpatient
+MED-PAT-0073,David Lopez,david.lopez@yahoo.com,Rheumatoid Arthritis,"Dr. Peters, MD",Kaiser Permanente,Active Outpatient
+MED-PAT-0074,Anthony Gomez,anthony.gomez@gmail.com,Rheumatoid Arthritis,"Dr. George, MD",Aetna,Scheduled Surgery
+MED-PAT-0075,Alexander Gutierrez,alexander.gutierrez@gmail.com,Rheumatoid Arthritis,"Dr. Stein, MD",UnitedHealthcare,In Remission
+MED-PAT-0076,Gina Jackson,gina.jackson@yahoo.com,Asthma,"Dr. Adams, MD",UnitedHealthcare,Active Outpatient
+MED-PAT-0077,Gary Hill,gary.hill@yahoo.com,Hypertension,"Dr. Patton, MD",Aetna,Observation
+MED-PAT-0078,Sheryl Le,sheryl.le@yahoo.com,Rheumatoid Arthritis,"Dr. Jensen, MD",Kaiser Permanente,Active Outpatient
+MED-PAT-0079,Derek Smith,derek.smith@yahoo.com,Asthma,"Dr. Skinner, MD",Kaiser Permanente,Observation
+MED-PAT-0080,Scott Jordan,scott.jordan@hotmail.com,Rheumatoid Arthritis,"Dr. Taylor, MD",Aetna,In Remission
