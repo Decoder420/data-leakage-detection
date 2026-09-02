@@ -3,7 +3,7 @@ import {
   Shield, Database, Users, GitMerge, Search, Play, Activity, 
   Download, Plus, RefreshCw, FileText, CheckCircle, AlertTriangle, 
   ExternalLink, Layers, Sparkles, Send, Radio, Terminal, TrendingUp,
-  Cpu, Lock, Fingerprint
+  Cpu, Lock, Fingerprint, Key
 } from 'lucide-react';
 
 import { 
