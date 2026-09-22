@@ -141,6 +141,21 @@ export default function ApiConfigModal({ isOpen, onClose, onConnected }) {
               Vite Proxy (/api)
             </button>
           </div>
+
+          {apiUrl.includes('.railway.internal') && (
+            <div style={{
+              marginTop: '12px',
+              padding: '10px 14px',
+              borderRadius: '8px',
+              background: 'rgba(234, 179, 8, 0.12)',
+              border: '1px solid rgba(234, 179, 8, 0.35)',
+              color: '#fde047',
+              fontSize: '12px',
+              lineHeight: 1.4
+            }}>
+              <strong>⚠️ Notice:</strong> <code>.railway.internal</code> is an internal mesh network URL that only works between containers inside Railway. To connect from your browser or Cloudflare, open your Railway Dashboard &gt; Service &gt; <strong>Settings &gt; Networking</strong> and click <strong>"Generate Domain"</strong> to get a public <code>https://...up.railway.app</code> URL.
+            </div>
+          )}
         </div>
 
         {/* Test Result Message */}

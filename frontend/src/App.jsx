@@ -222,7 +222,7 @@ export default function App() {
         top: 0,
         zIndex: 100
       }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
           
           {/* Logo & Brand */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -283,32 +283,33 @@ export default function App() {
           </nav>
 
           {/* Active Dataset Picker & Backend Status */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
             <button
               onClick={() => setIsApiConfigModalOpen(true)}
               title={`Click to configure API (${backendStatus.url || getApiBaseUrl()})`}
               style={{
-                background: backendStatus.connected ? 'rgba(34, 197, 94, 0.12)' : 'rgba(234, 179, 8, 0.12)',
-                border: `1px solid ${backendStatus.connected ? 'rgba(34, 197, 94, 0.3)' : 'rgba(234, 179, 8, 0.3)'}`,
+                background: backendStatus.connected ? 'rgba(34, 197, 94, 0.15)' : 'rgba(234, 179, 8, 0.18)',
+                border: `1px solid ${backendStatus.connected ? 'rgba(34, 197, 94, 0.4)' : 'rgba(234, 179, 8, 0.5)'}`,
                 color: backendStatus.connected ? '#86efac' : '#fde047',
                 borderRadius: '20px',
-                padding: '5px 12px',
-                fontSize: '11px',
-                fontWeight: 600,
+                padding: '6px 14px',
+                fontSize: '12px',
+                fontWeight: 700,
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '8px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
               }}>
               <span style={{
-                width: '7px',
-                height: '7px',
+                width: '8px',
+                height: '8px',
                 borderRadius: '50%',
                 background: backendStatus.connected ? '#22c55e' : '#eab308',
-                boxShadow: backendStatus.connected ? '0 0 8px #22c55e' : '0 0 8px #eab308'
+                boxShadow: backendStatus.connected ? '0 0 10px #22c55e' : '0 0 10px #eab308'
               }} />
-              {backendStatus.connected ? `Live API (${backendStatus.version || 'v2.1'})` : 'Standby Demo'}
-              <Server size={12} style={{ opacity: 0.7, marginLeft: '2px' }} />
+              {backendStatus.connected ? `Live API (${backendStatus.version || 'v2.1'})` : '⚙️ Connect Backend'}
+              <Server size={13} style={{ opacity: 0.8 }} />
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -353,6 +354,57 @@ export default function App() {
         {/* TAB 1: OVERVIEW & TELEMETRY */}
         {activeTab === 'overview' && (
           <div>
+            {/* Backend Connection Status Banner */}
+            <div style={{
+              background: backendStatus.connected 
+                ? 'linear-gradient(90deg, rgba(34, 197, 94, 0.1) 0%, rgba(15, 23, 42, 0.6) 100%)' 
+                : 'linear-gradient(90deg, rgba(234, 179, 8, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%)',
+              border: `1px solid ${backendStatus.connected ? 'rgba(34, 197, 94, 0.3)' : 'rgba(234, 179, 8, 0.35)'}`,
+              borderRadius: '12px',
+              padding: '12px 18px',
+              marginBottom: '20px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '12px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <span style={{
+                  width: '10px', height: '10px', borderRadius: '50%',
+                  background: backendStatus.connected ? '#22c55e' : '#eab308',
+                  boxShadow: backendStatus.connected ? '0 0 10px #22c55e' : '0 0 10px #eab308'
+                }} />
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: '13px', color: backendStatus.connected ? '#86efac' : '#fde047' }}>
+                    {backendStatus.connected ? `Backend Connected: ${backendStatus.url || 'Online'} (v${backendStatus.version || '2.1'})` : 'Backend Status: Standby Demo Mode'}
+                  </div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                    {backendStatus.connected 
+                      ? 'Live FastAPI Papadimitriou Attribution & Honeytoken engine connected.' 
+                      : 'Running interactive simulation mode. Click button to connect your Railway backend.'}
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsApiConfigModalOpen(true)}
+                style={{
+                  background: 'rgba(59, 130, 246, 0.15)',
+                  border: '1px solid rgba(59, 130, 246, 0.4)',
+                  color: '#93c5fd',
+                  borderRadius: '8px',
+                  padding: '7px 14px',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}>
+                <Server size={14} /> ⚙️ Configure Backend URL
+              </button>
+            </div>
+
             {/* Hero Metrics Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '32px' }}>
               <div className="glass-panel glass-panel-hover" style={{ padding: '24px' }}>
