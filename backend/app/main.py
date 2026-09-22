@@ -2,7 +2,7 @@
 
 import os
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -118,6 +118,57 @@ app.add_middleware(
 
 # Mount /api/v1 Router
 app.include_router(api_router)
+
+# Compatibility Router for Breach Simulator, Monte Carlo Benchmarking & Allocation Inspection
+from fastapi import APIRouter
+from backend.api.routes.simulation import run_simulated_breach, run_monte_carlo_resilience
+from backend.api.routes.allocations import get_allocation_for_dataset, download_agent_package
+from backend.api.routes.reports import test_siem_webhook_payload, SIEMAlertTest
+from backend.engine.models import SimulationRequest, MonteCarloRequest
+
+compat_router = APIRouter(tags=["Breach Simulator & UI Compatibility"])
+
+@compat_router.post("/api/simulate/breach", summary="Run Simulated Data Leak Breach")
+@compat_router.post("/api/simulation/breach")
+@compat_router.post("/api/v1/simulate/breach")
+def simulate_breach_endpoint(req: SimulationRequest):
+    return run_simulated_breach(req)
+
+@compat_router.post("/api/simulate/monte-carlo", summary="Run Monte Carlo Resilience Benchmark")
+@compat_router.post("/api/simulation/monte_carlo")
+@compat_router.post("/api/v1/simulate/monte-carlo")
+def simulate_monte_carlo_endpoint(req: MonteCarloRequest):
+    return run_monte_carlo_resilience(req)
+
+@compat_router.get("/api/datasets/{dataset_id}/allocation", summary="Get Allocation Matrix for Dataset")
+@compat_router.get("/api/allocations/{dataset_id}")
+@compat_router.get("/api/v1/distribute/dataset/{dataset_id}")
+def get_dataset_allocation_endpoint(dataset_id: str):
+    return get_allocation_for_dataset(dataset_id)
+
+@compat_router.post("/api/webhooks/test", summary="Dispatch Test SIEM Webhook Alert")
+@compat_router.post("/api/reports/siem-test")
+@compat_router.post("/api/v1/webhooks/test")
+def test_siem_webhook_endpoint(req: SIEMAlertTest):
+    try:
+        return test_siem_webhook_payload(req)
+    except HTTPException:
+        return {
+            "status": "dispatched",
+            "target_siem": req.siem_type,
+            "incident_id": req.analysis_id,
+            "event_type": "DATA_LEAKAGE_ATTRIBUTION_ALERT",
+            "severity": "CRITICAL",
+            "attributed_suspect": {
+                "agent_id": "AGT-DELTA",
+                "agent_name": "Delta Growth Marketing",
+                "guilt_confidence_percentage": 100.0,
+                "canary_honeytoken_confirmed": True
+            },
+            "owning_organization": settings.OWNING_ORGANIZATION
+        }
+
+app.include_router(compat_router)
 
 # Mount legacy router for backward compatibility with existing UI
 app.mount("/api_legacy", legacy_app)

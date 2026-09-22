@@ -3,8 +3,6 @@ import { X, Users, Shield } from 'lucide-react';
 import { createAgent, updateAgent } from '../api';
 
 export default function AgentModal({ isOpen, onClose, agentToEdit, onSaved }) {
-  if (!isOpen) return null;
-
   const [name, setName] = useState('');
   const [org, setOrg] = useState('');
   const [email, setEmail] = useState('');
@@ -28,6 +26,8 @@ export default function AgentModal({ isOpen, onClose, agentToEdit, onSaved }) {
       setTrust(85);
     }
   }, [agentToEdit]);
+
+  if (!isOpen) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

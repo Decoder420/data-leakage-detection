@@ -3,8 +3,6 @@ import { X, Sparkles, Upload, Database } from 'lucide-react';
 import { generateDataset, uploadDataset } from '../api';
 
 export default function DatasetStudioModal({ isOpen, onClose, onCreated }) {
-  if (!isOpen) return null;
-
   const [activeTab, setActiveTab] = useState('generate'); // 'generate' | 'upload'
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -18,6 +16,8 @@ export default function DatasetStudioModal({ isOpen, onClose, onCreated }) {
   const [uploadFile, setUploadFile] = useState(null);
   const [uploadName, setUploadName] = useState('');
   const [uploadCategory, setUploadCategory] = useState('Fintech');
+
+  if (!isOpen) return null;
 
   const handleGenerate = async (e) => {
     e.preventDefault();

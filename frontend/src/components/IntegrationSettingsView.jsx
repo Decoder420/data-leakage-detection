@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Radio, Save, Send, CheckCircle, AlertTriangle, Key, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Radio, Save, Send, CheckCircle, AlertTriangle, Key } from 'lucide-react';
 import { fetchIntegrationSettings, updateIntegrationSettings, testSocConnection } from '../api';
 
 export default function IntegrationSettingsView() {
-  const [settings, setSettings] = useState(null);
   const [targetName, setTargetName] = useState('');
   const [endpointUrl, setEndpointUrl] = useState('');
   const [apiKey, setApiKey] = useState('');
@@ -15,24 +14,25 @@ export default function IntegrationSettingsView() {
   const [testLoading, setTestLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState(null);
 
-  useEffect(() => {
-    loadSettings();
-  }, []);
-
-  const loadSettings = async () => {
+  const loadSettings = useCallback(async () => {
     try {
       const data = await fetchIntegrationSettings();
-      setSettings(data);
-      setTargetName(data.target_name || 'DecodeX Threat Hunting Platform');
-      setEndpointUrl(data.endpoint_url || 'http://localhost:8001/api/v1/alerts');
-      setApiKey(data.api_key || '');
-      setIsEnabled(data.is_enabled ?? true);
-      setAlertOnGuilt(data.alert_on_guilt ?? true);
-      setAlertOnCanary(data.alert_on_canary ?? true);
+      if (data) {
+        setTargetName(data.target_name || 'DecodeX Threat Hunting Platform');
+        setEndpointUrl(data.endpoint_url || 'http://localhost:8001/api/v1/alerts');
+        setApiKey(data.api_key || '');
+        setIsEnabled(data.is_enabled ?? true);
+        setAlertOnGuilt(data.alert_on_guilt ?? true);
+        setAlertOnCanary(data.alert_on_canary ?? true);
+      }
     } catch (e) {
       console.error('Failed to load integration settings:', e);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadSettings();
+  }, [loadSettings]);
 
   const handleSave = async (e) => {
     e.preventDefault();

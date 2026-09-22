@@ -3,9 +3,8 @@ import { Fingerprint, ShieldAlert, Zap } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function CanaryAlertBanner({ analysisResult }) {
-  if (!analysisResult || analysisResult.canary_hits_total === 0) return null;
-
   useEffect(() => {
+    if (!analysisResult || !analysisResult.canary_hits_total) return;
     // Fire celebratory detection confetti
     try {
       confetti({
@@ -17,7 +16,9 @@ export default function CanaryAlertBanner({ analysisResult }) {
     } catch (e) {
       // ignore
     }
-  }, [analysisResult.analysis_id]);
+  }, [analysisResult?.analysis_id, analysisResult?.canary_hits_total]);
+
+  if (!analysisResult || analysisResult.canary_hits_total === 0) return null;
 
   const confirmedAgent = analysisResult.top_suspect_name || analysisResult.canary_confirmed_agent_id;
 

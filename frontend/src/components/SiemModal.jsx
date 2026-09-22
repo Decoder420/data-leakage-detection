@@ -3,11 +3,11 @@ import { X, Send, Radio, CheckCircle } from 'lucide-react';
 import { testSiemWebhook } from '../api';
 
 export default function SiemModal({ isOpen, onClose, analysisId }) {
-  if (!isOpen || !analysisId) return null;
-
   const [siemType, setSiemType] = useState('Splunk');
   const [loading, setLoading] = useState(false);
   const [responsePayload, setResponsePayload] = useState(null);
+
+  if (!isOpen || !analysisId) return null;
 
   const handleSend = async () => {
     setLoading(true);

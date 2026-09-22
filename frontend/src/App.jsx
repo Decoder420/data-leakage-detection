@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
-  Shield, Database, Users, GitMerge, Search, Play, Activity, 
-  Download, Plus, RefreshCw, FileText, CheckCircle, AlertTriangle, 
-  ExternalLink, Layers, Sparkles, Send, Radio, Terminal, TrendingUp,
-  Cpu, Lock, Fingerprint, Key
+  Database, Users, GitMerge, Search, Play, Activity, 
+  Download, Plus, RefreshCw, FileText, 
+  Radio, Terminal, TrendingUp,
+  Cpu, Lock, Fingerprint, Key, Server
 } from 'lucide-react';
 
 import { 
   fetchHealth, fetchDatasets, fetchAgents, fetchAllocation, 
   createAllocation, analyzeLeakedFile, runSimulatedBreach, 
-  runMonteCarlo, getDownloadUrl, getReportHtmlUrl, deleteAgent 
+  runMonteCarlo, getDownloadUrl, deleteAgent, getPdfReportUrl,
+  checkBackendConnection, getApiBaseUrl 
 } from './api';
 
 import GuiltGauge from './components/GuiltGauge';
@@ -21,7 +22,7 @@ import SiemModal from './components/SiemModal';
 import EventsFeed from './components/EventsFeed';
 import IntegrationSettingsView from './components/IntegrationSettingsView';
 import ApiKeysView from './components/ApiKeysView';
-import { getPdfReportUrl } from './api';
+import ApiConfigModal from './components/ApiConfigModal';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'datasets' | 'agents' | 'allocations' | 'analysis' | 'simulator'
@@ -37,6 +38,10 @@ export default function App() {
   // Loading & error state
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Backend connection state (for Cloudflare Pages)
+  const [backendStatus, setBackendStatus] = useState({ connected: false, mode: 'checking' });
+  const [isApiConfigModalOpen, setIsApiConfigModalOpen] = useState(false);
 
   // Modals state
   const [isDatasetModalOpen, setIsDatasetModalOpen] = useState(false);
@@ -63,12 +68,21 @@ export default function App() {
   const [monteCarloResult, setMonteCarloResult] = useState(null);
   const [monteCarloLoading, setMonteCarloLoading] = useState(false);
 
-  // Initial Data Fetch
-  useEffect(() => {
-    loadInitialData();
+  const verifyBackend = useCallback(async () => {
+    try {
+      const res = await checkBackendConnection();
+      setBackendStatus({
+        connected: res.connected,
+        mode: res.connected ? 'live' : 'standby_demo',
+        url: res.url,
+        version: res.data?.version || '2.1.0'
+      });
+    } catch (e) {
+      setBackendStatus({ connected: false, mode: 'standby_demo', url: getApiBaseUrl() });
+    }
   }, []);
 
-  const loadInitialData = async () => {
+  const loadInitialData = useCallback(async () => {
     try {
       const [h, dsList, agList] = await Promise.all([
         fetchHealth().catch(() => ({ status: 'connected' })),
@@ -76,11 +90,11 @@ export default function App() {
         fetchAgents()
       ]);
       setHealth(h);
-      setDatasets(dsList);
-      setAgents(agList);
-      setSelectedAgentIds(agList.map(a => a.id));
+      setDatasets(dsList || []);
+      setAgents(agList || []);
+      setSelectedAgentIds((agList || []).map(a => a.id));
 
-      if (dsList.length > 0) {
+      if (dsList && dsList.length > 0) {
         const defaultDs = dsList[0].id;
         setSelectedDatasetId(defaultDs);
         const alloc = await fetchAllocation(defaultDs);
@@ -89,7 +103,13 @@ export default function App() {
     } catch (err) {
       console.error('Initial load failed:', err);
     }
-  };
+  }, []);
+
+  // Initial Data Fetch
+  useEffect(() => {
+    verifyBackend();
+    loadInitialData();
+  }, [verifyBackend, loadInitialData]);
 
   const handleDatasetChange = async (dsId) => {
     setSelectedDatasetId(dsId);
@@ -262,26 +282,73 @@ export default function App() {
             })}
           </nav>
 
-          {/* Active Dataset Picker */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '12px', color: 'var(--text-dim)' }}>Target Dataset:</span>
-            <select
-              className="form-select"
-              style={{ width: 'auto', padding: '6px 12px', fontSize: '12px' }}
-              value={selectedDatasetId}
-              onChange={e => handleDatasetChange(e.target.value)}>
-              {datasets.map(d => (
-                <option key={d.id} value={d.id}>
-                  {d.name} ({d.category})
-                </option>
-              ))}
-            </select>
+          {/* Active Dataset Picker & Backend Status */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <button
+              onClick={() => setIsApiConfigModalOpen(true)}
+              title={`Click to configure API (${backendStatus.url || getApiBaseUrl()})`}
+              style={{
+                background: backendStatus.connected ? 'rgba(34, 197, 94, 0.12)' : 'rgba(234, 179, 8, 0.12)',
+                border: `1px solid ${backendStatus.connected ? 'rgba(34, 197, 94, 0.3)' : 'rgba(234, 179, 8, 0.3)'}`,
+                color: backendStatus.connected ? '#86efac' : '#fde047',
+                borderRadius: '20px',
+                padding: '5px 12px',
+                fontSize: '11px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}>
+              <span style={{
+                width: '7px',
+                height: '7px',
+                borderRadius: '50%',
+                background: backendStatus.connected ? '#22c55e' : '#eab308',
+                boxShadow: backendStatus.connected ? '0 0 8px #22c55e' : '0 0 8px #eab308'
+              }} />
+              {backendStatus.connected ? `Live API (${backendStatus.version || 'v2.1'})` : 'Standby Demo'}
+              <Server size={12} style={{ opacity: 0.7, marginLeft: '2px' }} />
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '12px', color: 'var(--text-dim)' }}>Vault:</span>
+              <select
+                className="form-select"
+                style={{ width: 'auto', padding: '6px 12px', fontSize: '12px' }}
+                value={selectedDatasetId}
+                onChange={e => handleDatasetChange(e.target.value)}>
+                {datasets.map(d => (
+                  <option key={d.id} value={d.id}>
+                    {d.name} ({d.category})
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Main Content Area */}
       <main style={{ maxWidth: '1400px', margin: '0 auto', padding: '32px 24px', flex: 1, width: '100%' }}>
+
+        {error && (
+          <div style={{
+            background: 'rgba(239, 68, 68, 0.15)',
+            border: '1px solid #ef4444',
+            color: '#fca5a5',
+            padding: '12px 16px',
+            borderRadius: '10px',
+            marginBottom: '20px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            fontSize: '13px'
+          }}>
+            <span>⚠️ {error}</span>
+            <button onClick={() => setError(null)} style={{ background: 'none', border: 'none', color: '#fca5a5', cursor: 'pointer', fontSize: '14px' }}>✕</button>
+          </div>
+        )}
 
         {/* TAB 1: OVERVIEW & TELEMETRY */}
         {activeTab === 'overview' && (
@@ -1101,6 +1168,15 @@ export default function App() {
         isOpen={isSiemModalOpen}
         onClose={() => setIsSiemModalOpen(false)}
         analysisId={analysisResult ? analysisResult.analysis_id : null}
+      />
+
+      <ApiConfigModal
+        isOpen={isApiConfigModalOpen}
+        onClose={() => setIsApiConfigModalOpen(false)}
+        onConnected={() => {
+          verifyBackend();
+          loadInitialData();
+        }}
       />
     </div>
   );

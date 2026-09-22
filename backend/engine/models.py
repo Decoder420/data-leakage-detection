@@ -115,7 +115,7 @@ class LeakAnalysisResult(BaseModel):
 
 class SimulationRequest(BaseModel):
     dataset_id: str
-    scenario: str  # "single_agent_leak", "two_agent_collusion", "noisy_darkweb_leak", "subsample_leak"
+    scenario: str = "single_agent_leak"  # "single_agent_leak", "two_agent_collusion", "noisy_darkweb_leak", "subsample_leak"
     target_agent_id: Optional[str] = None
     target_agent_ids: Optional[List[str]] = None
     leak_percentage: float = Field(default=0.6, ge=0.05, le=1.0)
