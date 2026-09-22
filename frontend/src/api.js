@@ -9,7 +9,14 @@ export function getApiBaseUrl() {
     const custom = window.localStorage.getItem('decodex_api_url');
     if (custom) return custom.trim().replace(/\/+$/, '');
   }
-  return (import.meta.env.VITE_API_URL || 'http://localhost:8000').trim().replace(/\/+$/, '');
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl) return envUrl.trim().replace(/\/+$/, '');
+  
+  // If hosted on HTTPS (e.g. Cloudflare Pages or Workers), avoid mixed content to http://localhost
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return '';
+  }
+  return 'http://localhost:8008';
 }
 
 export function setApiBaseUrl(url) {

@@ -1,0 +1,13 @@
+{
+  "name": "data-leakage-detection",
+  "version": "2.1.0",
+  "private": true,
+  "description": "Enterprise Data Loss Prevention (DLP) & Third-Party Vendor Breach Attribution Platform by DecodeX Security Technologies Private Limited.",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "lint": "cd frontend && npm run lint",
+    "preview": "cd frontend && npm run preview",
+    "deploy:pages": "cd frontend && npm run build && npx -y wrangler pages deploy dist --project-name=data-leakage-detection",
+    "deploy:worker": "npm run build && npx -y wrangler deploy"
+  }
+}
