@@ -1,4 +1,6 @@
-# Multi-stage Python FastAPI Dockerfile
+# Multi-stage Python FastAPI Dockerfile — DecodeX Security Technologies Private Limited
+# Copyright (c) 2026 DecodeX Security Technologies Private Limited. All rights reserved.
+
 FROM python:3.11-slim
 
 WORKDIR /app

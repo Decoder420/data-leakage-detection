@@ -4,6 +4,7 @@
   "private": true,
   "description": "Enterprise Data Loss Prevention (DLP) & Third-Party Vendor Breach Attribution Platform by DecodeX Security Technologies Private Limited.",
   "scripts": {
+    "start": "uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8000}",
     "build": "cd frontend && npm install && npm run build",
     "lint": "cd frontend && npm run lint",
     "preview": "cd frontend && npm run preview",
