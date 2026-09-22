@@ -34,9 +34,10 @@ export default function ApiConfigModal({ isOpen, onClose, onConnected }) {
   };
 
   const handleReset = () => {
-    const defaultUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    const defaultUrl = isLocal ? 'http://localhost:8008' : (import.meta.env.VITE_API_URL || '');
     setApiUrl(defaultUrl);
-    setApiBaseUrl('');
+    setApiBaseUrl(defaultUrl);
     setTestResult(null);
   };
 
@@ -107,9 +108,39 @@ export default function ApiConfigModal({ isOpen, onClose, onConnected }) {
             className="form-input"
             value={apiUrl}
             onChange={(e) => setApiUrl(e.target.value)}
-            placeholder="https://api.yourdomain.com or http://localhost:8000"
+            placeholder="http://localhost:8008 or https://api.yourdomain.com"
             style={{ width: '100%', fontFamily: 'monospace', fontSize: '13px' }}
           />
+          <div style={{ display: 'flex', gap: '8px', marginTop: '8px', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => setApiUrl('http://localhost:8008')}
+              style={{
+                background: 'rgba(59, 130, 246, 0.1)',
+                border: '1px solid rgba(59, 130, 246, 0.3)',
+                color: '#93c5fd',
+                borderRadius: '6px',
+                padding: '4px 10px',
+                fontSize: '11px',
+                cursor: 'pointer'
+              }}>
+              Local (Port 8008)
+            </button>
+            <button
+              type="button"
+              onClick={() => setApiUrl('')}
+              style={{
+                background: 'rgba(16, 185, 129, 0.1)',
+                border: '1px solid rgba(16, 185, 129, 0.3)',
+                color: '#6ee7b7',
+                borderRadius: '6px',
+                padding: '4px 10px',
+                fontSize: '11px',
+                cursor: 'pointer'
+              }}>
+              Vite Proxy (/api)
+            </button>
+          </div>
         </div>
 
         {/* Test Result Message */}

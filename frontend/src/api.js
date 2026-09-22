@@ -29,31 +29,54 @@ export function setApiBaseUrl(url) {
   }
 }
 
-export async function checkBackendConnection() {
-  const base = getApiBaseUrl();
+async function pingHealth(targetUrl) {
   try {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 2500);
-    const res = await fetch(`${base}/api/v1/health`, { signal: controller.signal });
+    const timer = setTimeout(() => controller.abort(), 2000);
+    const res = await fetch(`${targetUrl}/api/v1/health`, { signal: controller.signal });
     clearTimeout(timer);
     if (res.ok) {
       const data = await res.json();
-      return { connected: true, data, url: base };
+      if (data && (data.status === 'healthy' || data.service?.includes('DecodeX') || data.features)) {
+        return { connected: true, data, url: targetUrl };
+      }
     }
   } catch (e) {
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 2000);
-      const res = await fetch(`${base}/api/health`, { signal: controller.signal });
+      const timer = setTimeout(() => controller.abort(), 1500);
+      const res = await fetch(`${targetUrl}/api/health`, { signal: controller.signal });
       clearTimeout(timer);
       if (res.ok) {
         const data = await res.json();
-        return { connected: true, data, url: base };
+        return { connected: true, data, url: targetUrl };
       }
     } catch (err) {
       // offline
     }
   }
+  return { connected: false, url: targetUrl };
+}
+
+export async function checkBackendConnection() {
+  const base = getApiBaseUrl();
+  const directRes = await pingHealth(base);
+  if (directRes.connected) return directRes;
+
+  // Auto-recovery for local dev: if base failed (e.g. port 8000 conflict), auto-probe port 8008 & Vite proxy
+  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    const localCandidates = ['http://localhost:8008', 'http://127.0.0.1:8008', ''];
+    for (const cand of localCandidates) {
+      if (cand !== base) {
+        const candRes = await pingHealth(cand);
+        if (candRes.connected) {
+          setApiBaseUrl(cand);
+          return candRes;
+        }
+      }
+    }
+  }
+
   return { connected: false, url: base };
 }
 
